@@ -67,7 +67,7 @@ Execute as seguintes requisições:
 
 ## Exercício
 
-### Endpoint para Adicionar Número
+### 1. Endpoint para adicionar número
 Crie um endpoint REST que aceita dois números como query parameters e retorna a soma desses números
 
 #### Exemplo da requisição:
