@@ -7,6 +7,9 @@
 - [Calculadora com Path Parameters](#calculadora-com-path-parameters)
   - [Lógica da calculadora](#lógica-da-calculadora)
   - [Tratamento de exceções](#tratamento-de-exceções)
+    - [Classe UnsupportedMathOperationException](#classe-unsupportedmathoperationexception)
+    - [Classe ExceptionResponse](#classe-exceptionresponse)
+    - [Classe CustomizedResponseEntityExceptionHandler](#classe-customizedresponseentityexceptionhandler)
 - [Exercícios](#exercícios)
 - [Referências](#referências)
 
@@ -109,9 +112,9 @@ A classe possui três atributos:
 
 Implemente as demais operações aritméticas como `subtração`, `divisão` e `multiplicação`.
 
-### 2. Refatoração
+### 2. Refatoração do projeto de exemplo
 
-O nosso controller operações de vários contextos como realizasr cálculos, efetuar validações e orquestrar as operações de requisição e resposta.
+O controller `MathController` executa operações de vários contextos como realizasr cálculos, efetuar validações e orquestrar as operações de requisição e resposta.
 
 Modifique o projeto para separar as operações por contextos em classes específicas facilitando manutenções futuras e o reuso de código.
 
