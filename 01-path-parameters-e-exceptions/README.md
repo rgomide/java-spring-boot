@@ -49,10 +49,25 @@ No projeto de exemplo, foi implementado um serviço REST para calcular a soma de
 
 A requisição proposta foi mapeada como:
 ```
-GET /somar/{valorUm}/{valorDois}
+GET /sum/{firstValue}/{secondValue}
 ```
 
 ### Lógica da calculadora
 
 
 ### Tratamento de exceções
+
+## Exercícios
+
+### 1. Implementar as demais operações matemáticas
+
+Implemente as demais operações aritméticas como `subtração`, `divisão` e `multiplicação`.
+
+### 2. Refatoração
+
+O nosso controller operações de vários contextos como realizasr cálculos, efetuar validações e orquestrar as operações de requisição e resposta.
+
+Modifique o projeto para separar as operações por contextos em classes específicas facilitando manutenções futuras e o reuso de código.
+
+## Referências
+- [Por que operações com números de ponto flutuantes podem retornar resultados estranhos?](https://floating-point-gui.de/basic/)
