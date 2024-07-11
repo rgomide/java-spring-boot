@@ -132,6 +132,28 @@ Além disso, o método [handleBadRequestExceptions](./src/main/java/br/com/gomid
 	- Cria uma instância de ExceptionResponse com a data/hora atual, a mensagem da exceção e a descrição da solicitação.
 	- Retorna um [ResponseEntity](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html) com o objeto [ExceptionResponse](./src/main/java/br/com/gomide/exceptions/ExceptionResponse.java) e o status HTTP BAD_REQUEST (400).
 
+#### Resumo
+
+Em resumo, o fluxo de tratamento de exceções é ilustrado no diagrama a seguir:
+
+```mermaid
+flowchart TD
+    A[Exceção Ocorre] --> B[Entrar em CustomizedResponseEntityExceptionHandler]
+    B --> C{Tipo de Exceção?}
+
+    C -->|Exception| D[Chamar handleAllExceptions]
+    C -->|UnsupportedMathOperationException| E[Chamar handleBadRequestExceptions]
+
+    D --> F[Criar ExceptionResponse]
+    E --> F[Criar ExceptionResponse]
+
+    F --> G[Definir Timestamp, Message e Details]
+    G --> H{Retornar ResponseEntity}
+
+    H -->|HttpStatus.INTERNAL_SERVER_ERROR| I[500 Internal Server Error]
+    H -->|HttpStatus.BAD_REQUEST| J[400 Bad Request]
+```
+
 ## Exercícios
 
 ### 1. Implementar as demais operações matemáticas
