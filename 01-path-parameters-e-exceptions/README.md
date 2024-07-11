@@ -54,6 +54,25 @@ GET /sum/{firstValue}/{secondValue}
 
 ### Lógica da calculadora
 
+A class controladora é a [MathController](./src/main/java/br/com/gomide/MathController.java), que possui o método `sum` responsável por:
+- Receber a requisição e extrair as variáveis de caminho
+- Validar os dados de entrada
+- Efetuar a operação de soma
+- Enviar a resposta
+
+#### Anotação @RequestMapping
+
+A anotação `@RequestMapping` uitlizada no método [sum](./src/main/java/br/com/gomide/MathController.java#L13) é usada para mapear solicitações HTTP para métodos específicos em controladores Spring. No exemplo acima, a URL `/sum/{firstValue}/{secondValue}` está sendo mapeada para o método somar, e o método aceita solicitações HTTP do tipo GET.
+
+-	`value = "/sum/{firstValue}/{secondValue}"`: Define a URL que deve ser acessada para invocar o método. Os valores `firstValue` e `secondValue` são parâmetros de caminho que serão extraídos da URL.
+-	`method = RequestMethod.GET`: Especifica que este método deve ser chamado quando uma solicitação HTTP GET for feita para a URL especificada.
+
+#### Anotação @PathVariable
+
+As anotações [`@PathVariable`](./src/main/java/br/com/gomide/MathController.java#L15) são usadas para extrair valores dos parâmetros de caminho da URL e vinculá-los aos parâmetros do método.
+
+-	`@PathVariable(value = "firstValue") String strFirstValue`: Extrai o valor de firstValue da URL e o atribui à variável `strFirstValue`.
+-	`@PathVariable(value = "secondValue") String strSecondValue`: Extrai o valor de secondValue da URL e o atribui à variável `strSecondValue`.
 
 ### Tratamento de exceções
 

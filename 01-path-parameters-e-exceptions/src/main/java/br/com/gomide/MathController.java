@@ -11,7 +11,7 @@ import br.com.gomide.exceptions.UnsupportedMathOperationException;
 public class MathController {
 
   @RequestMapping(value = "/sum/{firstValue}/{secondValue}", method = RequestMethod.GET)
-  public Double somar(
+  public Double sum(
       @PathVariable(value = "firstValue") String strFirstValue,
       @PathVariable(value = "secondValue") String strSecondValue) {
 
