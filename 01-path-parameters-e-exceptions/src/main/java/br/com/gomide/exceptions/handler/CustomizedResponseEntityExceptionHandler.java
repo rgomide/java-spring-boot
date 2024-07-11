@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import br.com.gomide.exceptions.ExceptionResponse;
 import br.com.gomide.exceptions.UnsupportedMathOperationException;
 
-@ControllerAdvice // tratamento global de controllers
+@ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 

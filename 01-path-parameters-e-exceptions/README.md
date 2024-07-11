@@ -83,6 +83,26 @@ As anotações [`@PathVariable`](./src/main/java/br/com/gomide/MathController.ja
 
 ### Tratamento de exceções
 
+Foi utilizado o mecanismo do Spring para tratamento de exceções a nível de requisição a partir da classe [`ResponseEntityExceptionHandler`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html).
+
+A partir da implementação desta classe conseguimos interceptar exceções e tratar o retorno criando um objeto de resposta.
+
+#### Classe `UnsupportedMathOperationException`
+
+A classe [UnsupportedMathOperationException](./src/main/java/br/com/gomide/exceptions/UnsupportedMathOperationException.java) foi criada para representar as exceções referentes a operações matemáticas numéricas.
+
+#### Classe `ExceptionResponse`
+
+A classe [`ExceptionResponse`](./src/main/java/br/com/gomide/exceptions/ExceptionResponse.java) é utilizada para definir a estrutura de uma resposta de exceção em uma aplicação.
+
+A classe possui três atributos:
+
+-	`timestamp`: Armazena a data e hora em que a exceção ocorreu.
+-	`message`: Armazena uma mensagem descritiva sobre a exceção.
+-	`details`: Armazena detalhes adicionais sobre a exceção.
+
+#### Classe `CustomizedResponseEntityExceptionHandler`
+
 ## Exercícios
 
 ### 1. Implementar as demais operações matemáticas
@@ -97,3 +117,4 @@ Modifique o projeto para separar as operações por contextos em classes especí
 
 ## Referências
 - [Por que operações com números de ponto flutuantes podem retornar resultados estranhos?](https://floating-point-gui.de/basic/)
+- [ResponseEntityExceptionHandler](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html)
