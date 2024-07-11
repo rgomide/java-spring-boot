@@ -2,6 +2,13 @@
 
 ## Sumário
 - [Introdução](#introdução)
+- [Query parameters](#query-parameters)
+- [Path parameters](#path-parameters)
+- [Calculadora com Path Parameters](#calculadora-com-path-parameters)
+  - [Lógica da calculadora](#lógica-da-calculadora)
+  - [Tratamento de exceções](#tratamento-de-exceções)
+- [Exercícios](#exercícios)
+- [Referências](#referências)
 
 ## Introdução
 Entendendo as anotações `@RestController`, `@RequestMapping` e `@PathVariable`.
@@ -71,8 +78,8 @@ A anotação `@RequestMapping` uitlizada no método [sum](./src/main/java/br/com
 
 As anotações [`@PathVariable`](./src/main/java/br/com/gomide/MathController.java#L15) são usadas para extrair valores dos parâmetros de caminho da URL e vinculá-los aos parâmetros do método.
 
--	`@PathVariable(value = "firstValue") String strFirstValue`: Extrai o valor de firstValue da URL e o atribui à variável `strFirstValue`.
--	`@PathVariable(value = "secondValue") String strSecondValue`: Extrai o valor de secondValue da URL e o atribui à variável `strSecondValue`.
+-	`@PathVariable(value = "firstValue") String strFirstValue`: Extrai o valor de `firstValue` da URL e o atribui à variável `strFirstValue`.
+-	`@PathVariable(value = "secondValue") String strSecondValue`: Extrai o valor de `secondValue` da URL e o atribui à variável `strSecondValue`.
 
 ### Tratamento de exceções
 
