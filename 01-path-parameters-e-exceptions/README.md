@@ -106,6 +106,32 @@ A classe possui três atributos:
 
 #### Classe `CustomizedResponseEntityExceptionHandler`
 
+A classe [CustomizedResponseEntityExceptionHandler](./src/main/java/br/com/gomide/exceptions/handler/CustomizedResponseEntityExceptionHandler.java) é utilizada para lidar com exceções em uma aplicação Spring Boot de maneira centralizada.
+
+Essa classe possui as anotações `@ControllerAdvice` e `@RestController`.
+
+A anotação `@ControllerAdvice` permite tratar exceções em todo o aplicativo de forma global e não apenas em um controlador específico.
+
+A classe estende [ResponseEntityExceptionHandler](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html), que é uma classe fornecida pelo Spring para tratar exceções padrão de forma mais conveniente.
+
+O método [handleAllExceptions](./src/main/java/br/com/gomide/exceptions/handler/CustomizedResponseEntityExceptionHandler.java#L21) é responsável por tratar todas as exceções do tipo Exception (e suas subclasses). A anotação `@ExceptionHandler(Exception.class)` indica que este método será chamado quando uma exceção do tipo Exception for lançada.
+
+-	Parâmetros:
+	- Exception exception: A exceção que foi lançada.
+	- WebRequest request: O objeto WebRequest que contém detalhes da solicitação.
+- Processo:
+	- Cria uma instância de ExceptionResponse com a data/hora atual, a mensagem da exceção e a descrição da solicitação.
+	- Retorna um [ResponseEntity](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html) com o objeto [ExceptionResponse](./src/main/java/br/com/gomide/exceptions/ExceptionResponse.java) e o status HTTP INTERNAL_SERVER_ERROR (500).
+
+Além disso, o método [handleBadRequestExceptions](./src/main/java/br/com/gomide/exceptions/handler/CustomizedResponseEntityExceptionHandler.java#L33) é responsável por tratar exceções do tipo [UnsupportedMathOperationException](./src/main/java/br/com/gomide/exceptions/UnsupportedMathOperationException.java). A anotação `@ExceptionHandler(UnsupportedMathOperationException.class)` indica que este método será chamado quando uma exceção desse tipo for lançada.
+
+-	Parâmetros:
+	- Exception exception: A exceção que foi lançada.
+	- WebRequest request: O objeto WebRequest que contém detalhes da solicitação.
+- Processo:
+	- Cria uma instância de ExceptionResponse com a data/hora atual, a mensagem da exceção e a descrição da solicitação.
+	- Retorna um [ResponseEntity](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html) com o objeto [ExceptionResponse](./src/main/java/br/com/gomide/exceptions/ExceptionResponse.java) e o status HTTP BAD_REQUEST (400).
+
 ## Exercícios
 
 ### 1. Implementar as demais operações matemáticas
@@ -121,3 +147,4 @@ Modifique o projeto para separar as operações por contextos em classes especí
 ## Referências
 - [Por que operações com números de ponto flutuantes podem retornar resultados estranhos?](https://floating-point-gui.de/basic/)
 - [ResponseEntityExceptionHandler](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html)
+- [ResponseEntity](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html)
