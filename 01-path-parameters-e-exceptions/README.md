@@ -162,7 +162,7 @@ Implemente as demais operações aritméticas como `subtração`, `divisão` e `
 
 ### 2. Refatoração do projeto de exemplo
 
-O controller `MathController` executa operações de vários contextos como realizasr cálculos, efetuar validações e orquestrar as operações de requisição e resposta.
+O controller `MathController` executa operações de vários contextos como realizar cálculos, efetuar validações e orquestrar as operações de requisição e resposta.
 
 Modifique o projeto para separar as operações por contextos em classes específicas facilitando manutenções futuras e o reuso de código.
 
