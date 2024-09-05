@@ -166,6 +166,21 @@ O controller `MathController` executa operações de vários contextos como real
 
 Modifique o projeto para separar as operações por contextos em classes específicas facilitando manutenções futuras e o reuso de código.
 
+### 3. Cálculo de Equações do Segundo Grau
+Desenvolva uma aplicação web em Java utilizando o framework Spring Boot. A aplicação deverá expor um endpoint REST que receba como parâmetros de caminho (path parameters) os coeficientes `a`, `b` e `c` de uma equação do segundo grau na forma `ax² + bx + c = 0`. O endpoint deverá calcular as raízes da equação, aplicando a fórmula de Bhaskara, e retornar o resultado em formato JSON. O sistema deve tratar casos onde não existam raízes reais (discriminante negativo) e retornar uma mensagem apropriada.
+
+Exemplo de requisição:
+```
+GET /equacao/2/4/-6
+```
+Exemplo de resposta:
+```json
+{
+  "raiz1": 1.0,
+  "raiz2": -3.0
+}
+```
+
 ## Referências
 - [Por que operações com números de ponto flutuantes podem retornar resultados estranhos?](https://floating-point-gui.de/basic/)
 - [ResponseEntityExceptionHandler](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/ResponseEntityExceptionHandler.html)
