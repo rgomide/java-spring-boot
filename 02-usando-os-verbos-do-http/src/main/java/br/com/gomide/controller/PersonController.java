@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gomide.model.Person;
-import br.com.gomide.services.PersonServices;
+import br.com.gomide.services.PersonService;
 import jakarta.websocket.server.PathParam;
 
 @RestController
@@ -22,7 +22,7 @@ import jakarta.websocket.server.PathParam;
 public class PersonController {
 
   @Autowired
-  private PersonServices service;
+  private PersonService service;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Person> findAll() {

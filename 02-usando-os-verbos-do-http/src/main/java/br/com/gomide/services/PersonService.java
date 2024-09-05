@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import br.com.gomide.model.Person;
 
 @Service
-public class PersonServices {
+public class PersonService {
 
   private final AtomicLong counter = new AtomicLong();
-  private Logger logger = Logger.getLogger(PersonServices.class.getName());
+  private Logger logger = Logger.getLogger(PersonService.class.getName());
 
   public List<Person> findAll() {
     logger.info("Method findAll started");
