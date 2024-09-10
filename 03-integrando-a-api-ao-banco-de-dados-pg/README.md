@@ -1,4 +1,4 @@
-# Integrando o API ao banco de dados Postgres
+# Integrando a API ao banco de dados Postgres
 
 ## Sumário
 
