@@ -18,7 +18,7 @@ import br.com.gomide.model.Person;
 import br.com.gomide.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/people")
 public class PersonController {
 
   @Autowired

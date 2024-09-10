@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "person")
+@Table(name = "people")
 public class Person implements Serializable {
 
   public static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Person implements Serializable {
   private String firstName;
 
   @Column(name = "last_name", nullable = false, length = 80)
-  private String lasttName;
+  private String lastName;
 
   @Column(length = 100)
   private String address;
@@ -50,12 +50,12 @@ public class Person implements Serializable {
     this.firstName = firstName;
   }
 
-  public String getLasttName() {
-    return lasttName;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setLasttName(String lasttName) {
-    this.lasttName = lasttName;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getAddress() {
@@ -80,7 +80,7 @@ public class Person implements Serializable {
     int result = 1;
     result = prime * result + ((id == null) ? 0 : id.hashCode());
     result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-    result = prime * result + ((lasttName == null) ? 0 : lasttName.hashCode());
+    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((address == null) ? 0 : address.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
     return result;
@@ -105,10 +105,10 @@ public class Person implements Serializable {
         return false;
     } else if (!firstName.equals(other.firstName))
       return false;
-    if (lasttName == null) {
-      if (other.lasttName != null)
+    if (lastName == null) {
+      if (other.lastName != null)
         return false;
-    } else if (!lasttName.equals(other.lasttName))
+    } else if (!lastName.equals(other.lastName))
       return false;
     if (address == null) {
       if (other.address != null)
