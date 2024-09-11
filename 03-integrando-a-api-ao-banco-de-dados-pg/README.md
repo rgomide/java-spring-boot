@@ -2,12 +2,22 @@
 
 ## Sumário
 
+- [Introdução](#introdução)
+- [O arquivo `application.properties`](#o-arquivo-applicationproperties)
+  - [Conexão com o Banco de Dados](#conexão-com-o-banco-de-dados)
+  - [Configurações do JPA/Hibernate](#configurações-do-jpahibernate)
+  - [Configurações do Servidor](#configurações-do-servidor)
+- [A classe de modelo `Person`](#a-classe-de-modelo-person)
+- [A interface `PersonRepository`](#a-interface-personrepository)
+- [Exercícios](#exercícios)
+- [Referências](#referências)
+
 ## Introdução
 
 ## O arquivo `application.properties`
 O arquivo [application.properties](./src/main/resources/application.properties) é típico de uma aplicação Spring Boot que possui as configurações do projeto, inclusive as configurações utilizadas para conexão com banco de dados PostgreSQL. Abaixo, segue a explicação de cada uma das propriedades listadas:
 
-#### Conexão com o Banco de Dados
+### Conexão com o Banco de Dados
 1. `spring.datasource.url=jdbc:postgresql://localhost:5432/people`
 
    Define a URL de conexão ao banco de dados. Neste caso, é um banco PostgreSQL hospedado localmente (`localhost`) na porta `5432` e o nome do banco de dados é `people`.
@@ -22,7 +32,7 @@ O arquivo [application.properties](./src/main/resources/application.properties) 
 4. `spring.datasource.driverClassName=org.postgresql.Driver`  
    Especifica a classe do driver JDBC que será utilizada para conectar ao banco de dados. Neste caso, é o driver do PostgreSQL.
 
-#### Configurações do JPA/Hibernate
+### Configurações do JPA/Hibernate
 
 5. `spring.jpa.show-sql=true`  
    Define se as consultas SQL geradas pelo Hibernate devem ser exibidas no console. Se definido como `true`, as consultas serão impressas no console, o que pode ser útil para depuração.
@@ -33,7 +43,7 @@ O arquivo [application.properties](./src/main/resources/application.properties) 
 7. `spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true`  
    Configuração específica do Hibernate para lidar com objetos grandes (LOBs) de maneira não contextual. Isso pode ser necessário em algumas versões do PostgreSQL para evitar erros ao manipular LOBs.
 
-#### Configurações do Servidor
+### Configurações do Servidor
 
 8. `server.port=8080`
    Define a porta na qual a aplicação Spring Boot será executada. Neste caso, está comentado (com `#`), então o valor padrão de `8080` seria usado.
