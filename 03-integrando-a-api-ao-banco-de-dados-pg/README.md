@@ -8,12 +8,17 @@
   - [Configurações do JPA/Hibernate](#configurações-do-jpahibernate)
   - [Configurações do Servidor](#configurações-do-servidor)
 - [A classe de modelo `Person`](#a-classe-de-modelo-person)
+  - [Tabela `people`](#tabela-people)
   - [Anotações Principais](#anotações-principais)
 - [A interface `PersonRepository`](#a-interface-personrepository)
 - [Exercícios](#exercícios)
 - [Referências](#referências)
 
 ## Introdução
+
+Nesta seção trabalharemos com o mapeamento objeto-relacional (ORM) em um projeto Java utilizando o framework Jakarta Persistense API (JPA) e os recursos específicos do Spring.
+
+O projeto de exemplo possui uma aplicação Sprint Web que mapea o endpoint `/people` com as operações básicas do CRUD persistindo a informação em um banco de dados Postgres.
 
 ## O arquivo `application.properties`
 O arquivo [application.properties](./src/main/resources/application.properties) é típico de uma aplicação Spring Boot que possui as configurações do projeto, inclusive as configurações utilizadas para conexão com banco de dados PostgreSQL. Abaixo, segue a explicação de cada uma das propriedades listadas:
@@ -52,12 +57,15 @@ O arquivo [application.properties](./src/main/resources/application.properties) 
 9. `server.contextPath=/app`
    Define o contexto da aplicação, ou seja, o prefixo de URL que será utilizado. Também está comentado, então o valor padrão (`/`) seria usado.
 
-
 ## A classe de modelo `Person`
 
 A classe [Person](./src/main/java/br/com/gomide/model/Person.java) apresentada faz parte de um modelo de domínio em uma aplicação Java utilizando o framework Jakarta Persistence API (JPA) para mapeamento objeto-relacional (ORM). Nesta classe, várias anotações são utilizadas para definir como a classe e seus atributos serão mapeados para uma tabela de banco de dados relacional.
 
 As anotações utilizadas nesta classe são fundamentais para definir o comportamento de persistência da entidade no banco de dados, garantindo que os dados sejam armazenados e recuperados corretamente de acordo com as regras definidas. Essas configurações tornam o processo de mapeamento objeto-relacional transparente e simplificado para o desenvolvedor.
+
+### Tabela `people`
+
+O script para a criação da tabela `people` está no arquivo [script-ddl.sql](./db/script-ddl.sql).
 
 ### Anotações Principais
 
