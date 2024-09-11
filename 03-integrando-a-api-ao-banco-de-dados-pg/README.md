@@ -8,6 +8,7 @@
   - [Configurações do JPA/Hibernate](#configurações-do-jpahibernate)
   - [Configurações do Servidor](#configurações-do-servidor)
 - [A classe de modelo `Person`](#a-classe-de-modelo-person)
+  - [Anotações Principais](#anotações-principais)
 - [A interface `PersonRepository`](#a-interface-personrepository)
 - [Exercícios](#exercícios)
 - [Referências](#referências)
