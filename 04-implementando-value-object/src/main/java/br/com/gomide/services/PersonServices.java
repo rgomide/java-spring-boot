@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.gomide.data.vo.v1.PersonVO;
+import br.com.gomide.data.vo.v2.PersonVOV2;
 import br.com.gomide.exceptions.ResourceNotFoundException;
 import br.com.gomide.mapper.DozerMapper;
+import br.com.gomide.mapper.custom.PersonMapper;
 import br.com.gomide.model.Person;
 import br.com.gomide.repositories.PersonRepository;
 
@@ -19,6 +21,9 @@ public class PersonServices {
 
   @Autowired
   PersonRepository repository;
+
+  @Autowired
+  PersonMapper mapper;
 
   public List<PersonVO> findAll() {
     logger.info("Method findAll started");
@@ -45,6 +50,15 @@ public class PersonServices {
     return DozerMapper.parseObject(
         repository.save(entity),
         PersonVO.class);
+  }
+
+  public PersonVOV2 createV2(PersonVOV2 person) {
+    logger.info("Method create started with V2");
+
+    Person entity = mapper.convertVoToEntity(person);
+    PersonVOV2 vo = mapper.convertEntityToVo(repository.save(entity));
+
+    return vo;
   }
 
   public PersonVO update(PersonVO person) {

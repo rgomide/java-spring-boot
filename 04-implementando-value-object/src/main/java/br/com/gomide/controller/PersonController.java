@@ -18,7 +18,7 @@ import br.com.gomide.data.vo.v1.PersonVO;
 import br.com.gomide.services.PersonServices;
 
 @RestController
-@RequestMapping("/people")
+@RequestMapping("/api/people/v1")
 public class PersonController {
 
   @Autowired
