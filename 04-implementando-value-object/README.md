@@ -77,157 +77,264 @@ Uma das estratégias mais comuns é incluir a versão da API diretamente na URL.
 ##### Contras:
 - A URL fica mais longa e, ao longo do tempo, pode se tornar difícil de gerenciar se houver muitas versões.
    
----
+### 2. Versionamento por Query Parameter
+As versões da API são especificadas como parâmetros de consulta na URL.
+   
+#### Exemplo:
+- `/api/recursos?version=1`
+- `/api/recursos?version=2`
+   
+##### Prós:
+- Mantém as URLs mais limpas e permite que a versão seja trocada sem mudar drasticamente a estrutura da URL.
+   
+##### Contras:
+- Pode ser menos intuitivo e mais difícil de documentar em comparação com o versionamento na URL.
+- Pode ser ignorado por caches de API.
+   
+### 3. Versionamento por Subdomínio ou Domínio
+A versão da API é especificada pelo subdomínio ou pelo domínio.
+   
+#### Exemplo:
+- `v1.api.example.com`
+- `v2.api.example.com`
+   
+##### Prós:
+- Pode ser útil para grandes sistemas distribuídos, permitindo isolar versões inteiras em diferentes servidores ou infraestrutura.
+- URLs limpas e facilmente separáveis por versão.
+   
+##### Contras:
+- Difícil de gerenciar conforme o número de versões cresce.
+- Exige configurações DNS e manutenção extra para o ambiente de infraestrutura.
+   
+### 4. Versionamento por Path Versioning
+Similar ao versionamento na URL, mas ao invés de incluir a versão na raiz, a versão é incluída em um nível mais profundo da URL.
+   
+#### Exemplo:
+- `/api/recursos/v1`
+- `/api/recursos/v2`
+   
+##### Prós:
+- Similar à estratégia de versão na URL, mas a versão não é colocada na raiz, o que pode ser útil em certos casos de roteamento.
+   
+##### Contras:
+- Ainda pode gerar URLs longas e difíceis de gerenciar conforme o número de versões aumenta.
 
-### 2. **Versionamento por Query Parameter**
-   - As versões da API são especificadas como parâmetros de consulta na URL.
+### 5. Versionamento por Campo no Corpo da Requisição (Payload Versioning)
+A versão é passada diretamente dentro do corpo da requisição.
    
-   **Exemplo**:
-   - `/api/recursos?version=1`
-   - `/api/recursos?version=2`
+#### Exemplo:
+```json
+{
+  "version": "1.0",
+  "data": {
+    ...
+  }
+}
+```
    
-   **Prós**:
-   - Mantém as URLs mais limpas e permite que a versão seja trocada sem mudar drasticamente a estrutura da URL.
+##### Prós:
+- Pode ser útil para APIs que exigem muita flexibilidade nos dados.
    
-   **Contras**:
-   - Pode ser menos intuitivo e mais difícil de documentar em comparação com o versionamento na URL.
-   - Pode ser ignorado por caches de API.
-   
----
+##### Contras:
+- Aumenta o risco de confusão entre diferentes versões e dificulta o uso de caches intermediários (ex.: proxies).
+- Não é uma abordagem RESTful, pois o controle da versão está fora do cabeçalho HTTP.
 
-### 3. **Versionamento por Cabeçalho (Header Versioning)**
-   - A versão é especificada no cabeçalho HTTP da requisição. Esse método é mais transparente e deixa a URL da API intocada.
-   
-   **Exemplo**:
-   - Cabeçalho `Accept`: `application/vnd.myapi.v1+json`
-   - Cabeçalho `Accept`: `application/vnd.myapi.v2+json`
-   
-   **Prós**:
-   - Mantém a URL limpa e a semântica mais RESTful.
-   - Fácil de adaptar para mudanças no formato de retorno (ex. XML, JSON, etc.).
-   
-   **Contras**:
-   - Mais complexo de implementar e pode ser menos intuitivo para desenvolvedores, exigindo uma boa documentação.
-   - Nem todos os clientes ou proxies HTTP lidam bem com headers customizados.
-   
----
+## Estratégia de versionamento adotada neste projeto
 
-### 4. **Versionamento por Subdomínio ou Domínio**
-   - A versão da API é especificada pelo subdomínio ou pelo domínio.
-   
-   **Exemplo**:
-   - `v1.api.example.com`
-   - `v2.api.example.com`
-   
-   **Prós**:
-   - Pode ser útil para grandes sistemas distribuídos, permitindo isolar versões inteiras em diferentes servidores ou infraestrutura.
-   - URLs limpas e facilmente separáveis por versão.
-   
-   **Contras**:
-   - Difícil de gerenciar conforme o número de versões cresce.
-   - Exige configurações DNS e manutenção extra para o ambiente de infraestrutura.
-   
----
+Neste projeto foi utilizada a estratégia de versionamento por `Path Versioning`, no qual o recurso `people` possui duas versões:
 
-### 5. **Versionamento por Media Type (Content Negotiation)**
-   - Baseia-se no uso do cabeçalho `Accept` para solicitar uma versão específica da API, com diferentes media types.
-   
-   **Exemplo**:
-   - `Accept: application/vnd.example.v1+json`
-   - `Accept: application/vnd.example.v2+xml`
-   
-   **Prós**:
-   - Pode lidar com versões e formatos de mídia ao mesmo tempo.
-   - Altamente flexível e respeita o conceito de content negotiation do HTTP.
-   
-   **Contras**:
-   - Mais complexo de implementar e entender.
-   - Exige uma estrutura de documentação robusta para explicar as diferentes media types.
-   
----
+- `/api/people/v1`
+- `/api/people/v2`
 
-### 6. **Versionamento por Path Versioning**
-   - Similar ao versionamento na URL, mas ao invés de incluir a versão na raiz, a versão é incluída em um nível mais profundo da URL.
-   
-   **Exemplo**:
-   - `/api/recursos/v1`
-   - `/api/recursos/v2`
-   
-   **Prós**:
-   - Similar à estratégia de versão na URL, mas a versão não é colocada na raiz, o que pode ser útil em certos casos de roteamento.
-   
-   **Contras**:
-   - Ainda pode gerar URLs longas e difíceis de gerenciar conforme o número de versões aumenta.
-   
----
+Para fins de organização, foram criados dois controladores:
 
-### 7. **Versionamento Implícito ou Semântico (Semantic Versioning)**
-   - O versionamento é implícito e segue a convenção de versionamento semântico (ex.: 1.0.0, 2.0.0). As versões são determinadas com base nas mudanças de funcionalidades e compatibilidade.
-   
-   **Exemplo**:
-   - `/api/recursos` para versões compatíveis.
-   - Incremento de versão apenas quando houver mudanças que quebrem a compatibilidade.
-   
-   **Prós**:
-   - Pode ser benéfico em casos onde pequenas mudanças não justificam uma nova versão explícita.
-   - Segue a prática comum do versionamento semântico, que é familiar para muitos desenvolvedores.
-   
-   **Contras**:
-   - Difícil de gerenciar quando há mudanças que afetam diferentes tipos de usuários.
-   - Pode ser confuso se não for bem documentado e controlado.
-   
----
+- [PersonController](./src/main/java/br/com/gomide/controller/PersonController.java)
+- [PersonV2Controller](./src/main/java/br/com/gomide/controller/PersonV2Controller.java)
 
-### 8. **Versionamento por Campo no Corpo da Requisição (Payload Versioning)**
-   - A versão é passada diretamente dentro do corpo da requisição.
-   
-   **Exemplo**:
-   ```json
-   {
-     "version": "1.0",
-     "data": {
-       ...
-     }
-   }
-   ```
-   
-   **Prós**:
-   - Pode ser útil para APIs que exigem muita flexibilidade nos dados.
-   
-   **Contras**:
-   - Aumenta o risco de confusão entre diferentes versões e dificulta o uso de caches intermediários (ex.: proxies).
-   - Não é uma abordagem RESTful, pois o controle da versão está fora do cabeçalho HTTP.
-   
----
+## PersonVOV2
 
-### 9. **Versionamento por Parâmetro de Fragmento (URI Fragment)**
-   - A versão é especificada como parte do fragmento da URI, depois do `#`.
+O controlador [PersonV2Controller](./src/main/java/br/com/gomide/controller/PersonV2Controller.java) utiliza o Value Object [PersonVOV2](./src/main/java/br/com/gomide/data/vo/v2/PersonVOV2.java) como formato de dados para a troca de mensagens.
+
+Neste VO, foi acrescentado o atributo `Date birthDay`. Como esse VO difere-se do modelo de dados, foi implementado uma classe de mapeamento customizada chamada [PersonMapper](./src/main/java/br/com/gomide/mapper/custom/PersonMapper.java).
+
+Nessa classe, o campo `birthDay` é gerado a partir da data atual. Modificaremos essa lógica nos exercícios propostos.
+
+Além disso, foram utilizadas as anotações `@JsonIgnore`, `@JsonProperty`, e `@JsonPropertyOrder` para controlalr a forma de serialização e desserialização dos arquivos JSON. Essas anotações são parte da biblioteca [Jackson](https://www.baeldung.com/jackson). No contexto da classe `PersonVOV2`, essas anotações configuram como os atributos dessa classe serão manipulados quando transformados em JSON ou lidos a partir de JSON.
+
+### 1. `@JsonIgnore`
+A anotação `@JsonIgnore` é usada para excluir um campo da serialização e desserialização JSON. Isso significa que, ao serializar um objeto da classe `PersonVOV2` para JSON, o campo anotado com `@JsonIgnore` será ignorado.
+
+#### No contexto:
+```java
+@JsonIgnore
+private String gender;
+```
+- O campo `gender` não será incluído na saída JSON quando um objeto `PersonVOV2` for serializado.
+- Da mesma forma, se um JSON recebido incluir o campo `gender`, ele será ignorado durante a desserialização, ou seja, o valor de `gender` não será lido nem atribuído ao objeto.
+
+#### Exemplo de JSON gerado:
+```json
+{
+  "id": 1,
+  "first_name": "John",
+  "last_name": "Doe",
+  "address": "123 Street",
+  "birth_day": "2000-01-01"
+}
+```
+Observe que `gender` não está presente.
+
+### 2. `@JsonProperty`
+A anotação `@JsonProperty` é usada para personalizar o nome de um campo durante a serialização e desserialização. Se um campo tiver um nome diferente no JSON (por exemplo, com underscores), `@JsonProperty` permite mapear esse nome JSON para o atributo Java correspondente.
+
+#### No contexto:
+```java
+@JsonProperty("first_name")
+private String firstName;
+
+@JsonProperty("last_name")
+private String lastName;
+
+@JsonProperty("birth_day")
+private Date birthDay;
+```
+- A propriedade `firstName` será serializada como `first_name` no JSON.
+- A propriedade `lastName` será serializada como `last_name` no JSON.
+- A propriedade `birthDay` será serializada como `birth_day` no JSON.
+
+#### Exemplo de JSON gerado:
+```json
+{
+  "id": 1,
+  "first_name": "John",
+  "last_name": "Doe",
+  "address": "123 Street",
+  "birth_day": "2000-01-01"
+}
+```
+Durante a desserialização, Jackson também espera que o JSON contenha os nomes com underscores (`first_name`, `last_name`, etc.), e os valores serão atribuídos corretamente aos campos Java `firstName`, `lastName`, e `birthDay`.
+
+### 3. `@JsonPropertyOrder`
+A anotação `@JsonPropertyOrder` define a ordem dos campos quando a classe é serializada para JSON. Isso pode ser útil para garantir uma apresentação consistente, especialmente se a ordem dos campos for importante para o cliente que consome a API.
+
+#### No contexto:
+```java
+@JsonPropertyOrder({ "id", "address", "firstName", "lastName", "address" })
+```
+- Essa anotação garante que os campos sejam serializados na ordem especificada: primeiro o `id`, seguido de `address`, `firstName`, e assim por diante.
+- Se a ordem dos atributos fosse importante, por exemplo, ao enviar dados a um sistema legível por humanos, essa anotação garantiria que os campos aparecessem nessa sequência específica no JSON gerado.
+
+#### Exemplo de JSON gerado com ordem definida:
+```json
+{
+  "id": 1,
+  "address": "123 Street",
+  "first_name": "John",
+  "last_name": "Doe",
+  "birth_day": "2000-01-01"
+}
+```
+Se o `@JsonPropertyOrder` não fosse especificado, Jackson poderia escolher qualquer ordem para os campos, o que pode ser problemático em algumas situações.
+
+## Migration com Flyway
+
+A partir desse projeto, utilizaremos a biblioteca [Flayway](https://documentation.red-gate.com/fd/flyway-documentation-138346877.html) como mecanismo de gerenciamento de versão do banco de dados. Essa biblioteca utiliza um esquema de nomenclatura específico para os arquivos de migração, o que permite organizar e aplicar scripts de banco de dados de maneira sequencial.
+
+A convenção de nomes dos arquivos de migração Flyway segue um padrão que permite que o Flyway identifique o tipo de migração, a versão, e uma breve descrição do que a migração faz. Esse esquema ajuda a garantir que as migrações sejam aplicadas na ordem correta.
+
+Por padrão os arquivos de migração ficam no diretório [src/main/resources/db/migration/](./src/main/resources/db/migration/).
+
+### Adicionar suporte ao Flyway no projeto
+
+Para adicionar o suporte a biblioteca Flyway no projeto, basta adicionar as seguintes dependências no arquivo [pom.xml](./pom.xml):
+
+```xml
+<dependency>
+  <groupId>org.flywaydb</groupId>
+  <artifactId>flyway-core</artifactId>
+</dependency>
+
+<dependency>
+  <groupId>org.flywaydb</groupId>
+  <artifactId>flyway-database-postgresql</artifactId>
+</dependency>
+```
+
+### Esquema de Nomenclatura
+
+A estrutura de nomeação dos arquivos de migração segue este formato:
+
+```plaintext
+<V|U|R>VERSION__DESCRIPTION.sql
+```
+
+- `V`: Representa uma migração de versão (Versioned migration).
+- `U`: Representa uma migração "undo", usada para desfazer uma migração aplicada anteriormente.
+- `R`: Representa uma migração repetível (Repeatable migration), que pode ser executada múltiplas vezes.
+- `VERSION`: A versão da migração, que pode ser um número inteiro ou uma sequência de números separados por ponto (e.g., `1`, `1.1`, `2.3.4`).
+- `__` (dois underscores): Separador entre a versão e a descrição.
+- `DESCRIPTION`: Uma descrição curta e amigável da migração, usando apenas letras, números e underscores (`_`). Espaços não são permitidos.
+- `.sql`: A extensão do arquivo, que indica que é um script SQL.
+
+### Exemplos de Arquivos de Migração
+
+#### 1. Versões (Versioned Migrations):
+
+Arquivos de migração de versão são executados **uma única vez** e em ordem sequencial de acordo com a versão especificada no nome do arquivo.
    
-   **Exemplo**:
-   - `/api/recursos#v1`
-   - `/api/recursos#v2`
+**Exemplo**:
+```plaintext
+V1__create_person_table.sql
+V2__add_age_column_to_person_table.sql
+V2.1__update_person_names.sql
+V3__add_orders_table.sql
+```
+- `V1`: A primeira migração cria a tabela `person`.
+- `V2`: A segunda migração adiciona a coluna `age` na tabela `person`.
+- `V2.1`: Uma subversão que atualiza os nomes das pessoas.
+- `V3`: A terceira versão adiciona a tabela `orders`.
+
+#### 2. Desfazer Migrações (Undo Migrations):
+
+Se o suporte para "undo" estiver ativado, você pode criar scripts de "undo" para reverter migrações específicas. Isso é útil se houver necessidade de desfazer alterações aplicadas por uma migração anterior.
+
+**Exemplo**:
+```plaintext
+U1__drop_person_table.sql
+```
+- `U1`: Este arquivo desfaz a migração `V1`, removendo a tabela `person`.
+
+#### 3. Migrações Repetíveis (Repeatable Migrations):
+Migrações repetíveis são scripts que podem ser executados múltiplas vezes. Elas não têm uma versão associada, mas sempre serão reaplicadas se houver uma alteração no conteúdo do arquivo.
+
+**Exemplo**:
+```plaintext
+R__refresh_materialized_view.sql
+```
+- `R__refresh_materialized_view`: Este arquivo será executado sempre que houver uma mudança no script SQL, independentemente de quantas vezes tenha sido executado antes.
+
+### Regras de Versionamento e Execução
+
+1. **Execução sequencial**: Migrações de versão (arquivos começando com `V`) são aplicadas em ordem sequencial, de acordo com o número da versão. As versões mais antigas são aplicadas antes das mais novas.
    
-   **Prós**:
-   - Pode ser útil para lidar com estados de recursos no front-end, como em SPAs.
-   
-   **Contras**:
-   - Não é uma abordagem RESTful.
-   - Os fragmentos não são enviados ao servidor pela requisição HTTP, então essa abordagem é limitada.
-   
----
+2. **Migrações únicas**: Migrações de versão são executadas **apenas uma vez**. Depois que uma migração é aplicada, ela não é reaplicada, a menos que seja revertida explicitamente ou o banco de dados seja reconfigurado.
 
-### Conclusão
+3. **Migrações repetíveis**: Migrações repetíveis (arquivos começando com `R`) são executadas sempre que são modificadas ou quando Flyway detecta que é necessário reaplicar (por exemplo, ao atualizar uma view materializada).
 
-A escolha da estratégia de versionamento de API depende muito do contexto do projeto, dos consumidores da API e dos requisitos de evolução da aplicação. As estratégias mais populares e amplamente utilizadas são o **versionamento na URL** e o **versionamento por cabeçalho**, mas cada estratégia possui prós e contras específicos.
+4. **Undos opcionais**: Migrações "undo" (arquivos começando com `U`) só são aplicadas se o Flyway estiver configurado para suportar rollback e a funcionalidade for necessária.
 
-A decisão deve levar em conta:
-- Facilidade de implementação e uso.
-- Complexidade de manutenção.
-- Compatibilidade com padrões de RESTful.
-- Necessidades de backwards compatibility e suporte a múltiplas versões.
+### Boas Práticas
+- **Nomes descritivos**: A descrição (`DESCRIPTION`) deve ser curta, mas suficientemente clara para explicar o que a migração faz. Isso facilita o entendimento da evolução do banco de dados.
+  
+  **Exemplo**:
+  ```plaintext
+  V1__create_user_table.sql
+  V2__add_email_column_to_user_table.sql
+  ```
 
-### Migration com Flyway
+- **Versão sem pulos**: As versões de migração devem ser sequenciais e não pular versões. O Flyway pode detectar versões que faltam, o que pode gerar erros.
 
+- **Evitar edições em versões já aplicadas**: Após uma migração ser aplicada a um ambiente, evitar alterações nos scripts de versão. Para correções, crie uma nova migração com uma versão subsequente.
 
 ## Exercícios
 
