@@ -3,16 +3,29 @@ package br.com.gomide.data.vo.v2;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({ "id", "address", "firstName", "lastName", "address" })
 public class PersonVOV2 implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
   private Long id;
+
+  @JsonProperty("first_name")
   private String firstName;
+
+  @JsonProperty("last_name")
   private String lastName;
+
   private String address;
+
+  @JsonIgnore()
   private String gender;
 
+  @JsonProperty("birth_day")
   private Date birthDay;
 
   public PersonVOV2() {
@@ -26,7 +39,7 @@ public class PersonVOV2 implements Serializable {
     this.id = id;
   }
 
-  public Date getBirthDay() {    
+  public Date getBirthDay() {
     return birthDay;
   }
 
@@ -121,7 +134,5 @@ public class PersonVOV2 implements Serializable {
       return false;
     return true;
   }
-
-  
 
 }
