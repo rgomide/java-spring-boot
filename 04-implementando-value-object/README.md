@@ -1,8 +1,21 @@
-# O padrão de projetos VO (value Object)
+# O padrão Value Object, versionamento de APIs e migrations
 
 ## Sumário
 
+- [Introdução](#introdução)
+- [O padrão de projetos VO (Value Object)](#o-padrão-de-projetos-vo-value-object)
+  - [Objetivos do VO no em um projeto](#objetivos-do-vo-no-em-um-projeto)
+- [Conversão entre Entidade e Value Object](#conversão-entre-entidade-e-value-object)
+  - [Alternativas ao DozerMapper](#alternativas-ao-dozermapper)
+- [Versionamento](#versionamento)
+- [Estratégia de versionamento adotada neste projeto](#estratégia-de-versionamento-adotada-neste-projeto)
+- [PersonVOV2](#personvov2)
+- [Migration com Flyway](#migration-com-flyway)
+- [Exercícios](#exercícios)
+
 ## Introdução
+
+Neste projeto analizaremos o padrão Value Object, versionamento de APIs e esquemas de migração de banco de dados.
 
 ## O padrão de projetos VO (Value Object)
 

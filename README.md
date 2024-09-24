@@ -5,6 +5,7 @@
 - [Path params e tratamento de exceções](./01-path-parameters-e-exceptions/)
 - [Como usar os verbos HTTP no Spring](./02-usando-os-verbos-do-http/)
 - [Integrando a API ao banco de dados Postgres](./03-integrando-a-api-ao-banco-de-dados-pg/)
+- [O padrão Value Object, versionamento de APIs e migrations](./04-implementando-value-object/)
 
 # Referências
 - [Spring Boot](https://spring.io/projects/spring-boot)
