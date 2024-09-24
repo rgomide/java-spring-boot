@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gomide.data.vo.v1.PersonVO;
+import br.com.gomide.mapper.DozerMapper;
+import br.com.gomide.model.Person;
 import br.com.gomide.services.PersonServices;
 
 @RestController
@@ -26,23 +28,32 @@ public class PersonController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<PersonVO> findAll() {
-    return service.findAll();
+    return DozerMapper.parseListObjects(
+        service.findAll(),
+        PersonVO.class);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public PersonVO findById(@PathVariable(value = "id") Long id) {
-    System.out.println(id);
-    return service.findById(id);
+    return DozerMapper.parseObject(
+        service.findById(id),
+        PersonVO.class);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public PersonVO create(@RequestBody PersonVO person) {
-    return service.create(person);
+    Person entity = service.create(
+        DozerMapper.parseObject(person, Person.class));
+
+    return DozerMapper.parseObject(entity, PersonVO.class);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public PersonVO update(@RequestBody PersonVO person) {
-    return service.update(person);
+    Person entity = service.update(
+        DozerMapper.parseObject(person, Person.class));
+
+    return DozerMapper.parseObject(entity, PersonVO.class);
   }
 
   @DeleteMapping(value = "/{id}")

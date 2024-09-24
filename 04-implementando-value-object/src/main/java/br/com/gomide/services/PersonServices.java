@@ -6,10 +6,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.gomide.data.vo.v1.PersonVO;
-import br.com.gomide.data.vo.v2.PersonVOV2;
 import br.com.gomide.exceptions.ResourceNotFoundException;
-import br.com.gomide.mapper.DozerMapper;
 import br.com.gomide.mapper.custom.PersonMapper;
 import br.com.gomide.model.Person;
 import br.com.gomide.repositories.PersonRepository;
@@ -25,43 +22,26 @@ public class PersonServices {
   @Autowired
   PersonMapper mapper;
 
-  public List<PersonVO> findAll() {
+  public List<Person> findAll() {
     logger.info("Method findAll started");
 
-    return DozerMapper.parseListObjects(
-        repository.findAll(),
-        PersonVO.class);
+    return repository.findAll();
   }
 
-  public PersonVO findById(Long id) {
+  public Person findById(Long id) {
     logger.info("Method findById started");
 
-    Person entity = repository.findById(id)
+    return repository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException(String.format("Person not found for id: %s", id)));
-
-    return DozerMapper.parseObject(entity, PersonVO.class);
   }
 
-  public PersonVO create(PersonVO person) {
+  public Person create(Person person) {
     logger.info("Method create started");
 
-    Person entity = DozerMapper.parseObject(person, Person.class);
-
-    return DozerMapper.parseObject(
-        repository.save(entity),
-        PersonVO.class);
+    return repository.save(person);
   }
 
-  public PersonVOV2 createV2(PersonVOV2 person) {
-    logger.info("Method create started with V2");
-
-    Person entity = mapper.convertVoToEntity(person);
-    PersonVOV2 vo = mapper.convertEntityToVo(repository.save(entity));
-
-    return vo;
-  }
-
-  public PersonVO update(PersonVO person) {
+  public Person update(Person person) {
     logger.info("Method update started");
 
     long id = person.getId();
@@ -69,11 +49,7 @@ public class PersonServices {
     repository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException(String.format("Person not found for id: %s", id)));
 
-    Person entity = DozerMapper.parseObject(person, Person.class);
-
-    return DozerMapper.parseObject(
-        repository.save(entity),
-        PersonVO.class);
+    return repository.save(person);
   }
 
   public void delete(Long id) {

@@ -11,7 +11,7 @@ import br.com.gomide.model.Person;
 @Service
 public class PersonMapper {
 
-  public PersonVOV2 convertEntityToVo(Person person) {
+  public static PersonVOV2 convertEntityToVo(Person person) {
     PersonVOV2 vo = new PersonVOV2();
 
     vo.setId(person.getId());
@@ -25,7 +25,7 @@ public class PersonMapper {
     return vo;
   }
 
-  public Person convertVoToEntity(PersonVOV2 person) {
+  public static Person convertVoToEntity(PersonVOV2 person) {
     Person entity = new Person();
 
     entity.setId(person.getId());
