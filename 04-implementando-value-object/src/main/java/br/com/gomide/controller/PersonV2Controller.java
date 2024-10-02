@@ -20,7 +20,7 @@ public class PersonV2Controller {
   private PersonServices service;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public PersonVOV2 createV2(@RequestBody PersonVOV2 person) {
+  public PersonVOV2 create(@RequestBody PersonVOV2 person) {
     Person entity = service.create(PersonMapper.convertVoToEntity(person));
 
     return PersonMapper.convertEntityToVo(entity);
