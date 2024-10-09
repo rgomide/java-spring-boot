@@ -10,9 +10,29 @@
 
 ## Introdução
 
-Compartilhamento de recursos de origem cruzada (CORS)
-
 o recurso de um site só pode acesar outro recurso do mesmo site se eles estiverem no mesmo domínio ([same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)). Mesmo endereço, subdomínio e porta.
+
+segurança implementado pelos navegadores web que permite que recursos (como APIs) em uma página web sejam solicitados de outro domínio, fora do domínio de onde o recurso se originou. Isso é uma extensão da política de mesma origem (same-origin policy), que normalmente restringe as solicitações web a recursos do mesmo domínio por razões de segurança.
+
+CORS funciona adicionando novos cabeçalhos HTTP que permitem que servidores especifiquem quais origens têm permissão para acessar seus recursos. Quando um navegador faz uma solicitação de origem cruzada, ele primeiro envia uma solicitação de pré-voo (preflight request) para verificar se o servidor permite a solicitação real.
+
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (Navegador)
+    participant Servidor as Servidor
+
+    Cliente->>Servidor: Solicitação de pré-voo (OPTIONS)
+    Note over Cliente,Servidor: Inclui cabeçalhos Origin, Access-Control-Request-Method, etc.
+    Servidor->>Cliente: Resposta de pré-voo
+    Note over Servidor,Cliente: Inclui cabeçalhos Access-Control-Allow-Origin, Access-Control-Allow-Methods, etc.
+    
+    alt Pré-voo bem-sucedido
+        Cliente->>Servidor: Solicitação real (GET, POST, etc.)
+        Servidor->>Cliente: Resposta com recursos solicitados
+    else Pré-voo falhou
+        Cliente->>Cliente: Bloqueia a solicitação real
+    end
+```
 
 ## Habilitando o CORS no Spring Framework
 
