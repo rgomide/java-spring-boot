@@ -12,7 +12,7 @@
 
 o recurso de um site só pode acesar outro recurso do mesmo site se eles estiverem no mesmo domínio ([same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)). Mesmo endereço, subdomínio e porta.
 
-segurança implementado pelos navegadores web que permite que recursos (como APIs) em uma página web sejam solicitados de outro domínio, fora do domínio de onde o recurso se originou. Isso é uma extensão da política de mesma origem (same-origin policy), que normalmente restringe as solicitações web a recursos do mesmo domínio por razões de segurança.
+CORS (Cross-Origin Resource Sharing) é um mecanismo de segurança implementado pelos navegadores web que permite que recursos (como APIs) em uma página web sejam solicitados de outro domínio, fora do domínio de onde o recurso se originou. Isso é uma extensão da política de mesma origem (same-origin policy), que normalmente restringe as solicitações web a recursos do mesmo domínio por razões de segurança.
 
 CORS funciona adicionando novos cabeçalhos HTTP que permitem que servidores especifiquem quais origens têm permissão para acessar seus recursos. Quando um navegador faz uma solicitação de origem cruzada, ele primeiro envia uma solicitação de pré-voo (preflight request) para verificar se o servidor permite a solicitação real.
 
