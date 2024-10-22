@@ -1,4 +1,4 @@
-# Mapeando os relacionamentos
+# Mapeando relacionamentos entre entidades
 
 ## Sumário
 
