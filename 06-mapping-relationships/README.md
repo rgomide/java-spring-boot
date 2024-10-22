@@ -54,12 +54,12 @@ As classes [Person](./src/main/java/br/com/gomide/model/Person.java), [Phone](./
 
 ### Associações utilizadas neste projeto
 
-#### Entre `Person` e `Email`:
+#### Entre `People` e `Email`:
 
 - [@OneToMany](./src/main/java/br/com/gomide/model/Person.java#L37) - Uma pessoa pode ter vários emails.
 - [@ManyToOne](./src/main/java/br/com/gomide/model/Email.java#L27) - Um email pertence a uma pessoa.
 
-#### Entre `Person` e `Phone`:
+#### Entre `People` e `Phone`:
 
 Essa associação é mapeada por meio de uma classe associativa [PersonPhone](./src/main/java/br/com/gomide/model/PersonPhone.java). A classe [PersonPhoneId](./src/main/java/br/com/gomide/model/PersonPhoneId.java) é utilizada para mapear a chave composta a partir da anotação [@EmbeddedId](./src/main/java/br/com/gomide/model/PersonPhone.java#L14).
 
