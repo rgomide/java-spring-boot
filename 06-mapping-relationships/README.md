@@ -66,7 +66,7 @@ Essa associação é mapeada por meio de uma classe associativa [PersonPhone](./
 Assim, temos:
 
 - [@OneToMany](./src/main/java/br/com/gomide/model/Person.java#L40) - Uma pessoa pode ter vários telefones.
-- [@OneToMany](./src/main/java/br/com/gomide/model/Phone.java#L24) - Um telefone pertence a várias pessoa.
+- [@OneToMany](./src/main/java/br/com/gomide/model/Phone.java#L24) - Um telefone pertence a várias pessoas.
 
 ## Rotas
 
