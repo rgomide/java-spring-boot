@@ -1,0 +1,209 @@
+{
+    "info": {
+        "_postman_id": "cdb9e615-ca3d-44b9-81f0-bfe2a4e28fac",
+        "name": "associationCollection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "people",
+            "item": [
+                {
+                    "name": "Get all People",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                },
+                {
+                    "name": "Get People by Id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "emails",
+            "item": [
+                {
+                    "name": "Get Emails by Person",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1/emails",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1",
+                                "emails"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                },
+                {
+                    "name": "Create new Email",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1/emails",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1",
+                                "emails"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\": \"user@host.com.br\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Email",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/emails/100",
+                            "path": [
+                                "api",
+                                "v1",
+                                "emails",
+                                "100"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "phones",
+            "item": [
+                {
+                    "name": "Get Phones by Person",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1/phones",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1",
+                                "phones"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                },
+                {
+                    "name": "Add Phone to a Person",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1/phones/6",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1",
+                                "phones",
+                                "6"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"primary\": false\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete a Phone of a Person",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/v1/people/1/phones/6",
+                            "path": [
+                                "api",
+                                "v1",
+                                "people",
+                                "1",
+                                "phones",
+                                "6"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
