@@ -19,30 +19,20 @@ import br.com.gomide.data.vo.v1.PersonVO;
 import br.com.gomide.mapper.DozerMapper;
 import br.com.gomide.model.Email;
 import br.com.gomide.model.Person;
-import br.com.gomide.services.PersonServices;
+import br.com.gomide.services.PersonService;
 
 @RestController
-@RequestMapping("/api/people/v1")
+@RequestMapping("/api/v1/people")
 public class PersonController {
 
   @Autowired
-  private PersonServices service;
+  private PersonService service;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<PersonVO> findAll() {
     return DozerMapper.parseListObjects(
         service.findAll(),
         PersonVO.class);
-  }
-
-  @GetMapping(value = "/{id}/emails", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<EmailVO> listEmails(@PathVariable(value = "id") Long id) {
-    Person person = service.findById(id);
-    List<Email> emails = person.getEmails();
-
-    return DozerMapper.parseListObjects(
-        emails,
-        EmailVO.class);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

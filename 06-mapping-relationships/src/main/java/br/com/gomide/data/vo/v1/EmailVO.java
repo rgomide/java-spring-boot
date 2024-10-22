@@ -6,6 +6,7 @@ public class EmailVO implements Serializable {
 
   private Long id;
   private String email;
+  private Long personId;
 
   public Long getId() {
     return id;
@@ -23,4 +24,11 @@ public class EmailVO implements Serializable {
     this.email = email;
   }
 
+  public Long getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(Long personId) {
+    this.personId = personId;
+  }
 }
