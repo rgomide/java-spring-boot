@@ -12,7 +12,8 @@ import br.com.gomide.model.Email;
 @Service
 public class EmailMapper {
 
-  public static List<EmailVO> convertEntityToVO(List<Email> emails) {
+  public static List<EmailVO> convertEntityToVO(
+      List<Email> emails) {
     List<EmailVO> vos = new ArrayList<EmailVO>();
 
     for (Email email : emails) {
@@ -23,7 +24,8 @@ public class EmailMapper {
   }
 
   public static EmailVO convertEntityToVO(Email email) {
-    EmailVO vo = DozerMapper.parseObject(email, EmailVO.class);
+    EmailVO vo =
+        DozerMapper.parseObject(email, EmailVO.class);
     vo.setPersonId(email.getPersonId());
     return vo;
   }

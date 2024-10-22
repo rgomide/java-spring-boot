@@ -13,15 +13,14 @@ public class WebConfig implements WebMvcConfigurer {
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
-    String[] allowedPatterns = corsOriginPatterns.split(",");
+    String[] allowedPatterns =
+        corsOriginPatterns.split(",");
 
     registry.addMapping("/**")
-        .allowedOrigins(allowedPatterns)
-        .allowedMethods("*")
+        .allowedOrigins(allowedPatterns).allowedMethods("*")
         .allowCredentials(true);
 
-    registry.addMapping("/**")
-        .allowedOrigins("*")
+    registry.addMapping("/**").allowedOrigins("*")
         .allowedMethods("GET");
   }
 

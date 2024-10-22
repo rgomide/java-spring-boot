@@ -21,7 +21,8 @@ public class Person implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "first_name", nullable = false, length = 80)
+  @Column(name = "first_name", nullable = false,
+      length = 80)
   private String firstName;
 
   @Column(name = "last_name", nullable = false, length = 80)
@@ -36,7 +37,17 @@ public class Person implements Serializable {
   @OneToMany(mappedBy = "person")
   private List<Email> emails;
 
-  public Person() {
+  @OneToMany(mappedBy = "person")
+  private List<PersonPhone> phones;
+
+  public Person() {}
+
+  public List<PersonPhone> getPhones() {
+    return phones;
+  }
+
+  public void setPhones(List<PersonPhone> phones) {
+    this.phones = phones;
   }
 
   public List<Email> getEmails() {
@@ -91,11 +102,16 @@ public class Person implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-    result = prime * result + ((address == null) ? 0 : address.hashCode());
-    result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+    result =
+        prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result
+        + ((firstName == null) ? 0 : firstName.hashCode());
+    result = prime * result
+        + ((lastName == null) ? 0 : lastName.hashCode());
+    result = prime * result
+        + ((address == null) ? 0 : address.hashCode());
+    result = prime * result
+        + ((gender == null) ? 0 : gender.hashCode());
     return result;
   }
 

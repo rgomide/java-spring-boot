@@ -25,14 +25,14 @@ public class Email implements Serializable {
   private String email;
 
   @ManyToOne
-  @JoinColumn(name = "person_id", insertable = false, updatable = false)
+  @JoinColumn(name = "person_id", insertable = false,
+      updatable = false)
   private Person person;
 
   @Column(name = "person_id")
   private Long personId;
 
-  public Email() {
-  }
+  public Email() {}
 
   public Long getId() {
     return id;

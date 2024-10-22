@@ -13,7 +13,8 @@ import br.com.gomide.repositories.PersonRepository;
 @Service
 public class PersonService {
 
-  private Logger logger = Logger.getLogger(PersonService.class.getName());
+  private Logger logger =
+      Logger.getLogger(PersonService.class.getName());
 
   @Autowired
   PersonRepository repository;
@@ -27,8 +28,9 @@ public class PersonService {
   public Person findById(Long id) {
     logger.info("Method findById started");
 
-    return repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(String.format("Person not found for id: %s", id)));
+    return repository.findById(id).orElseThrow(
+        () -> new ResourceNotFoundException(String
+            .format("Person not found for id: %s", id)));
   }
 
   public Person create(Person person) {
@@ -37,13 +39,14 @@ public class PersonService {
     return repository.save(person);
   }
 
-  public Person update(Person person) {
+  public Person update(Long id, Person person) {
     logger.info("Method update started");
 
-    long id = person.getId();
+    repository.findById(id).orElseThrow(
+        () -> new ResourceNotFoundException(String
+            .format("Person not found for id: %s", id)));
 
-    repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(String.format("Person not found for id: %s", id)));
+    person.setId(id);
 
     return repository.save(person);
   }
@@ -51,8 +54,9 @@ public class PersonService {
   public void delete(Long id) {
     logger.info("Method delete started");
 
-    Person entity = repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(String.format("Person not found for id: %s", id)));
+    Person entity = repository.findById(id).orElseThrow(
+        () -> new ResourceNotFoundException(String
+            .format("Person not found for id: %s", id)));
 
     repository.delete(entity);
   }

@@ -24,18 +24,19 @@ public class EmailService {
     return emailRepository.save(email);
   }
 
-  public Email update(Email email) {
-    long id = email.getId();
+  public Email update(Long id, Email email) {
+    emailRepository.findById(id).orElseThrow(
+        () -> new ResourceNotFoundException(String
+            .format("Email not found for id: %s", id)));
 
-    emailRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(String.format("Email not found for id: %s", id)));
-
+    email.setId(id);
     return emailRepository.save(email);
   }
 
   public void delete(Long id) {
-    emailRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(String.format("Email not found for id: %s", id)));
+    emailRepository.findById(id).orElseThrow(
+        () -> new ResourceNotFoundException(String
+            .format("Email not found for id: %s", id)));
 
     emailRepository.deleteById(id);
   }

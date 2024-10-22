@@ -26,29 +26,44 @@ public class EmailController {
   @Autowired
   private EmailService emailService;
 
-  @GetMapping(value = "/people/{personId}/emails", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<EmailVO> findByPerson(@PathVariable(value = "personId") Long personId) {
-    List<Email> emails = emailService.findByPersonId(personId);
+  @GetMapping(value = "/people/{personId}/emails",
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<EmailVO> findByPerson(
+      @PathVariable(value = "personId") Long personId) {
+    List<Email> emails =
+        emailService.findByPersonId(personId);
+
     return EmailMapper.convertEntityToVO(emails);
   }
 
-  @PostMapping(value = "/people/{personId}/emails", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public EmailVO create(@PathVariable(value = "personId") Long personId, @RequestBody EmailVO emailVO) {
+  @PostMapping(value = "/people/{personId}/emails",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public EmailVO create(
+      @PathVariable(value = "personId") Long personId,
+      @RequestBody EmailVO emailVO) {
     Email email = EmailMapper.convertVOToEntity(emailVO);
     email = emailService.create(personId, email);
+
     return EmailMapper.convertEntityToVO(email);
   }
 
-  @PutMapping(value = "/emails", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public EmailVO update(@RequestBody EmailVO emailVO) {
+  @PutMapping(value = "/emails/{id}",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public EmailVO update(@PathVariable(value = "id") Long id,
+      @RequestBody EmailVO emailVO) {
     Email email = EmailMapper.convertVOToEntity(emailVO);
-    email = emailService.update(email);
+    email = emailService.update(id, email);
+
     return EmailMapper.convertEntityToVO(email);
   }
 
   @DeleteMapping(value = "/emails/{id}")
-  public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+  public ResponseEntity<?> delete(
+      @PathVariable(value = "id") Long id) {
     emailService.delete(id);
+
     return ResponseEntity.noContent().build();
   }
 }

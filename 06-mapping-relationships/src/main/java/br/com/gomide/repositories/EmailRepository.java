@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import br.com.gomide.model.Email;
 
 @Repository
-public interface EmailRepository extends JpaRepository<Email, Long> {
+public interface EmailRepository
+    extends JpaRepository<Email, Long> {
 
   List<Email> findByPersonId(Long personId);
 
